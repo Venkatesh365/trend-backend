@@ -10,7 +10,7 @@ app.use(cors())
 
 app.use(express.json())
 const bcrypt = require("bcrypt")
-
+const jwt = require("jsonwebtoken")
 const dbPath = path.join(__dirname, "user.db");
 
 let db = null;
@@ -76,20 +76,43 @@ app.post("/users/", async (request, response) => {
   });
 
   //user login//
-  app.post("/login", async (request, response) => {
-    const { username, password } = request.body;
-    const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
-    const dbUser = await db.get(selectUserQuery);
-    if (dbUser === undefined) {
-      response.status(400);
-      response.send("Invalid User");
+  //app.post("/login", async (request, response) => {
+    //const { username, password } = request.body;
+    //const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+    //const dbUser = await db.get(selectUserQuery);
+    //if (dbUser === undefined) {
+      //response.status(400);
+     // response.send("Invalid User");
+  //  } else {
+   //   const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
+     // if (isPasswordMatched === true) {
+    //    response.send("Login Success!");
+     // } else {
+   //     response.status(400);
+    //    response.send("Invalid Password");
+    //  }
+   // }
+ // });//
+
+
+ app.post("/login", async (request, response) => {
+  const { username, password } = request.body;
+  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+  const dbUser = await db.get(selectUserQuery);
+  if (dbUser === undefined) {
+    response.status(400);
+    response.send("Invalid User");
+  } else {
+    const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
+    if (isPasswordMatched === true) {
+      const payload = {
+        username: username,
+      };
+      const jwtToken = jwt.sign(payload, "MY_SECRET_TOKEN");
+      response.send({ jwtToken });
     } else {
-      const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
-      if (isPasswordMatched === true) {
-        response.send("Login Success!");
-      } else {
-        response.status(400);
-        response.send("Invalid Password");
-      }
+      response.status(400);
+      response.send("Invalid Password");
     }
-  });
+  }
+});
