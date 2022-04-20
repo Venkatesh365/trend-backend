@@ -7,7 +7,7 @@ const sqlite3 = require("sqlite3");
 const app = express();
 const port = process.env.PORT||4000
 app.use(cors({
-  origin:"http://localhost:4000"
+  origin:"https://l-o-g-i-n365.herokuapp.com"
 }))
 
 app.use(express.json())
