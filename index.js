@@ -32,6 +32,22 @@ const initializeDBAndServer = async () => {
 
 initializeDBAndServer();
 
+//get user//
+app.get("/userdata/", async (request, response) => {
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+      user
+    ORDER BY
+      name;`;
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
+
+
+
+
 //user register//
 app.post("/users/", async (request, response) => {
     const { username, name, password, gender, location } = request.body;
