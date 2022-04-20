@@ -5,8 +5,9 @@ const path = require("path");
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const app = express();
-app.use(cors())
 const port = process.env.PORT||4000
+app.use(cors())
+
 app.use(express.json())
 const bcrypt = require("bcrypt")
 
