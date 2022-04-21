@@ -6,9 +6,7 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const app = express();
 const port = process.env.PORT||4000
-app.use(cors({
-  origin:"https://l-o-g-i-n365.herokuapp.com"
-}))
+app.use(cors())
 
 app.use(express.json())
 const bcrypt = require("bcrypt")
@@ -77,26 +75,26 @@ app.post("/users/", async (request, response) => {
     }
   });
 
-  //user login//
-  //app.post("/login", async (request, response) => {
-    //const { username, password } = request.body;
-    //const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
-    //const dbUser = await db.get(selectUserQuery);
-    //if (dbUser === undefined) {
-      //response.status(400);
-     // response.send("Invalid User");
-  //  } else {
-   //   const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
-     // if (isPasswordMatched === true) {
-    //    response.send("Login Success!");
-     // } else {
-   //     response.status(400);
-    //    response.send("Invalid Password");
-    //  }
-   // }
- // });//
+  //user logins//
+  app.post("/logins", async (request, response) => {
+    const { username, password } = request.body;
+    const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+    const dbUser = await db.get(selectUserQuery);
+    if (dbUser === undefined) {
+    response.status(400);
+     response.send("Invalid User");
+    } else {
+      const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
+    if (isPasswordMatched === true) {
+        response.send("Login Success!");
+      } else {
+        response.status(400);
+      response.send("Invalid Password");
+   }
+   }
+  });
 
-
+ //user login//
  app.post("/login", async (request, response) => {
   const { username, password } = request.body;
   const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
