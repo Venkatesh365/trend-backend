@@ -1,29 +1,27 @@
-GET http://localhost:4000/userdata/
+GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/userdata/
 
 
 
 
 ###
 
-GET http://localhost:4000/worldmap
 
-###
-POST http://localhost:4000/users/
+POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/users/
 Content-Type: application/json
 
 {
-    "name":"Eswar Vinay Venkatesh Pedagadi",
-    "username":"rahul",
-    "password":"rahul@2021",
+    "name":"Sudheer",
+    "username":"Sudheer@365",
+    "password":"Sudheer@365",
     "gender":"Male",
     "location":"Rayavaram"
 }
 
 ###
 
-POST http://localhost:4000/login
+POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/login
 Content-Type: application/json
 
-{"username":"rahul","password":"rahul@2021"}
+{"username":"Sudheer@365","password":"Sudheer@365"}
 
 ###
