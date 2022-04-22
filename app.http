@@ -1,4 +1,4 @@
-GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/userdata/
+GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/userdata/
 
 
 
@@ -6,22 +6,22 @@ GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/userdata/
 ###
 
 
-POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/users/
+POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/users/
 Content-Type: application/json
 
 {
-    "name":"Sudh=eer",
-    "username":"Sudher@365",
-    "password":"Sudheer=@365",
-    "gender":"Mae",
-    "location":"Raavaram"
+    "name":"Manoj",
+    "username":"Manoj@365",
+    "password":"Manoj@365",
+    "gender":"Male",
+    "location":"Rayavaram"
 }
 
 ###
 
-POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/login
+POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/login
 Content-Type: application/json
 
-{"username":"Sudheer@365","password":"Sudheer@365"}
+{"username":"Manoj@365","password":"Manoj@365"}
 
 ###
