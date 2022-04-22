@@ -1,4 +1,4 @@
-GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/userdata/
+GET https://a-u-t-h-e-n-t-i-c-a.herokuapp.com/userdata/
 
 
 
@@ -6,7 +6,7 @@ GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/userdata/
 ###
 
 
-POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/users/
+POST https://a-u-t-h-e-n-t-i-c-a.herokuapp.com/users/
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
 
 ###
 
-POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/login
+POST https://a-u-t-h-e-n-t-i-c-a.herokuapp.com/login
 Content-Type: application/json
 
 {"username":"Sudheer@365","password":"Sudheer@365"}
