@@ -1,27 +1,16 @@
-GET https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/userdata/
 
 
 
-
-###
-
-
-POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/users/
+POST http://localhost:6000/users/
 Content-Type: application/json
 
 {
-    "name":"Manoj",
-    "username":"Manoj@365",
-    "password":"Manoj@365",
+    "name":"Hemanth",
+    "username":"Hemanth@365",
+    "password":"Hemanth@365",
     "gender":"Male",
     "location":"Rayavaram"
 }
 
-###
 
-POST https://a-u-t-h-e-n-t-i-c-a-t-i-o-n-s.herokuapp.com/login
-Content-Type: application/json
 
-{"username":"Manoj@365","password":"Manoj@365"}
-
-###

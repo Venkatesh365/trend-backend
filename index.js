@@ -5,7 +5,7 @@ const path = require("path");
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const app = express();
-const port = process.env.PORT||4000
+const port = process.env.PORT||6000
 app.use(cors())
 
 app.use(express.json())
@@ -22,7 +22,7 @@ const initializeDBAndServer = async () => {
       driver: sqlite3.Database,
     });
     app.listen(port, () => {
-      console.log("Server Running at http://localhost:4000/");
+      console.log("Server Running at http://localhost:6000/");
     });
   } catch (e) {
     console.log(`DB Error: ${e.message}`);
@@ -126,3 +126,4 @@ app.post("/users/", async (request, response) => {
     }
   }
 });
+

@@ -6,3 +6,8 @@
  -- location VARCHAR(200)
 
 --);
+
+--DELETE FROM
+  --user
+---WHERE
+  --username = "rahul";
