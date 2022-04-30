@@ -17,7 +17,6 @@ const { title } = require("process");
 const dbPath = path.join(__dirname, "user.db");
 
 let db = null;
-
 const initializeDBAndServer = async () => {
   try {
     db = await open({
@@ -34,6 +33,12 @@ const initializeDBAndServer = async () => {
 };
 
 initializeDBAndServer();
+
+const data = require('./data.json')
+app.get("/products", (request, response) => {
+  response.send(data);
+});
+
 
 // userdata//
 app.get("/userdata/", async (request, response) => {
