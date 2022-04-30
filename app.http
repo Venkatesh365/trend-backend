@@ -1,1 +1,14 @@
-GET http://localhost:4000/
+POST http://localhost:4000/upload
+Content-Type: application/json
+
+  {
+        "title": "Nova SuperGroom Multi-kit",
+        "brand": "Nova",
+        "price": 1199,
+        "id": 30,
+        "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-nover-v2-trimmer.png",
+        "rating": "4.4"
+    }
+###
+
+GET http://localhost:4000/prime-deals

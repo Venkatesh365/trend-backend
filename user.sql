@@ -13,11 +13,16 @@
   --username = "rahul";
 
 
-  CREATE TABLE products (
-    brand VARCHAR(200),
-    id INTEGER,
-    image_url VARCHAR(200),
-    price INTEGER,
-    rating VARCHAR(200),
-    title  VARCHAR(200)
-);
+--   CREATE TABLE products (
+--     brand VARCHAR(200),
+--     id INTEGER,
+--     image_url VARCHAR(200),
+--     price INTEGER,
+--     rating VARCHAR(200),
+--     title  VARCHAR(200)
+-- );
+
+-- DELETE FROM
+--   products
+-- WHERE
+--   id = 30
