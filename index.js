@@ -35,29 +35,15 @@ const initializeDBAndServer = async () => {
 
 initializeDBAndServer();
 
-
-
-
-
-
-
-
-
-
-
-
-// userdata//
-// app.get("/userdata/", async (request, response) => {
-//   const getBooksQuery = `
-//     SELECT
-//       *
-//     FROM
-//       user
-//     ORDER BY
-//       name;`;
-//   const booksArray = await db.all(getBooksQuery);
-//   response.send(booksArray);
-// });
+app.use(function(req, res, next){
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if(req.method==='OPTIONS'){
+      res.sendStatus(200);
+  }
+  next()
+});
 
 
 // // products//
@@ -100,16 +86,18 @@ app.post("/upload", async (request, response) => {
     }
   });
 
-  app.use(function(req, res, next){
-    res.header('Access-Control-Allow-Headers', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    if(req.method==='OPTIONS'){
-        res.sendStatus(200);
-    }
-    next()
-});
-
+ // userdata//
+// app.get("/userdata/", async (request, response) => {
+//   const getBooksQuery = `
+//     SELECT
+//       *
+//     FROM
+//       user
+//     ORDER BY
+//       name;`;
+//   const booksArray = await db.all(getBooksQuery);
+//   response.send(booksArray);
+// });
 
 // //user register//
 // app.post("/users/", async (request, response) => {
