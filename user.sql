@@ -22,7 +22,7 @@
 --     title  VARCHAR(200)
 -- );
 
-DELETE FROM
-  products
-WHERE
-  id = 30
+-- DELETE FROM
+--   products
+-- WHERE
+--   id = 13
