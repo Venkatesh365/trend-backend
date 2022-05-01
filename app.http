@@ -2,12 +2,12 @@ POST http://localhost:4000/upload
 Content-Type: application/json
 
   {
-   "title": "fffffffff",
-   "brand": "Novffffffffffa",
-    "price": 111111111111,
-    "id": 30,
-    "image_url": "https://assets.ccbp.in/ffffffffffffffffffffffffffffffffrontend/react-js/ecommerce/electronics-nover-v2-trimmer.png",
-    "rating": "4ffffffffffffffffff.4"
+    "brand": "Saadgi",
+    "id": 14,
+    "imageUrl": "https://assets.ccbp.in/frontend/react-js/ecommerce/clothes-white-punjabi.png",
+    "price": 2172,
+    "rating": "3.2",
+    "title": "Sheer Anarkali"
   }
 ###
 
