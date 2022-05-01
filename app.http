@@ -4,7 +4,7 @@ Content-Type: application/json
   {
     "brand": "Nova",
     "id": 30,
-    "imageUrl": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-nover-v2-trimmer.png",
+    "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-nover-v2-trimmer.png",
     "price": 1199,
     "rating": "4.4",
     "title": "Nova SuperGroom Multi-kit"
