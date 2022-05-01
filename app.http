@@ -2,12 +2,12 @@ POST http://localhost:4000/upload
 Content-Type: application/json
 
   {
-    "brand": "Saadgi",
-    "id": 14,
-    "imageUrl": "https://assets.ccbp.in/frontend/react-js/ecommerce/clothes-white-punjabi.png",
-    "price": 2172,
-    "rating": "3.2",
-    "title": "Sheer Anarkali"
+    "brand": "Nova",
+    "id": 30,
+    "imageUrl": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-nover-v2-trimmer.png",
+    "price": 1199,
+    "rating": "4.4",
+    "title": "Nova SuperGroom Multi-kit"
   }
 ###
 
