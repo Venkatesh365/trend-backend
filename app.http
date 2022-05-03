@@ -1,14 +1,21 @@
 POST http://localhost:4000/upload
 Content-Type: application/json
 
-  {
-    "brand": "Nova",
-    "id": 30,
-    "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-nover-v2-trimmer.png",
-    "price": 1199,
-    "rating": "4.4",
-    "title": "Nova SuperGroom Multi-kit"
-  }
+{
+   "title": "Embellished Maxi Dress",
+    "brand": "STREET 9",
+    "price": 1799,
+    "id": 15,
+    "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/cloths-blue-fork.png",
+    "rating": "3.2"
+}
+ 
+      
+
+       
+ 
+
+  
 ###
 
 GET http://localhost:4000/prime-deals

@@ -60,31 +60,36 @@ app.get("/prime-deals", async (request, response) => {
  });
 
  //user upload//
-app.post("/upload", async (request, response) => {
-    const { title, brand, price, id, rating,image_url } = request.body;
-    const selectUserQuery = `SELECT * FROM products WHERE title = '${title}'`;
-    const dbUser = await db.get(selectUserQuery);
-    if (dbUser === undefined) {
-      const createUserQuery = `
-        INSERT INTO 
-          products (title, brand, price, id, rating,image_url) 
-        VALUES 
-          (
-            '${title}', 
-            '${brand}',
-            ${price}, 
-            ${id},
-            '${rating}',
-            '${image_url}'
-          )`;
-      const dbResponse = await db.run(createUserQuery);
-      const newUserId = dbResponse.lastID;
-      response.send(`Created new user with ${newUserId}`);
-    } else {
-      response.status = 400;
-      response.send("User already exists");
-    }
-  });
+ app.post("/upload", async (request, response) => {
+  const bookDetails = request.body;
+  const {
+    title,
+    brand,
+    id,
+    price,
+    image_url,
+    rating
+  } = bookDetails;
+  const addBookQuery = `
+    INSERT INTO
+      products (title,brand,id,price,image_url,rating)
+    VALUES
+      (
+        '${title}',
+         '${brand}',
+         ${id},
+         ${price},
+        
+      
+        
+        '${image_url}',
+        '${rating}'
+      );`;
+
+  const dbResponse = await db.run(addBookQuery);
+  const bookId = dbResponse.lastID;
+  response.send({ bookId: bookId });
+});
 
  // userdata//
 // app.get("/userdata/", async (request, response) => {
