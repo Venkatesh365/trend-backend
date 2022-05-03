@@ -35,15 +35,7 @@ const initializeDBAndServer = async () => {
 
 initializeDBAndServer();
 
-app.use(function(req, res, next){
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  if(req.method==='OPTIONS'){
-      res.sendStatus(200);
-  }
-  next()
-});
+
 
 
 // // products//
@@ -58,6 +50,16 @@ app.get("/prime-deals", async (request, response) => {
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
  });
+
+ app.use(function(req, res, next){
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if(req.method==='OPTIONS'){
+      res.sendStatus(200);
+  }
+  next()
+});
 
  //user upload//
  app.post("/upload", async (request, response) => {
