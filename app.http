@@ -1,21 +1,19 @@
 POST http://localhost:4000/upload
 Content-Type: application/json
 
-{
-   "title": "Embellished Maxi Dress",
-    "brand": "STREET 9",
-    "price": 1799,
-    "id": 15,
-    "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/cloths-blue-fork.png",
-    "rating": "3.2"
-}
- 
-      
-
-       
- 
-
-  
+ {
+            "title": "Privateer Quartz Watch",
+            "brand": "Fossil",
+            "price": 8122,
+            "id": 31,
+            "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-royal-black-watch.png",
+            "rating": "4.4"
+        }
 ###
 
 GET http://localhost:4000/prime-deals
+
+
+###
+
+GET http://localhost:4000/products/low-price

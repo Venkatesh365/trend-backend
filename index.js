@@ -93,6 +93,46 @@ app.get("/prime-deals", async (request, response) => {
   response.send({ bookId: bookId });
 });
 
+
+app.get("/products/high-price", async (request, response) => {
+  const {
+    order = "DESC",
+    order_by = "price",
+    search_q = "",
+  } = request.query;
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+     title LIKE '%${search_q}%'
+    ORDER BY ${order_by} ${order}`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
+
+app.get("/products/low-price", async (request, response) => {
+  const {
+    order = "ASC",
+    order_by = "price",
+    search_q = "",
+  } = request.query;
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+     title LIKE '%${search_q}%'
+    ORDER BY ${order_by} ${order}`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
+
+
  // userdata//
 // app.get("/userdata/", async (request, response) => {
 //   const getBooksQuery = `
