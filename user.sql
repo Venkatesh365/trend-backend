@@ -25,4 +25,4 @@
 DELETE FROM
   products
 WHERE
-  id = 15
+  id = 24

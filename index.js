@@ -81,9 +81,6 @@ app.get("/prime-deals", async (request, response) => {
          '${brand}',
          ${id},
          ${price},
-        
-      
-        
         '${image_url}',
         '${rating}'
       );`;
