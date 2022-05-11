@@ -231,6 +231,20 @@ app.get("/toys", async (request, response) => {
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
 });
+//grocery//
+app.get("/grocery", async (request, response) => {
+  
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+    category LIKE 'grocery'`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
 
  //userdata//
 app.get("/userdata/", async (request, response) => {
