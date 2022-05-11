@@ -2,12 +2,14 @@ POST http://localhost:4000/upload
 Content-Type: application/json
 
     {
-            "title": "Fresh Produce Green Chilli",
-            "brand": "Amazon",
-            "price": 30,
-            "id": 39,
-            "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/grocery-green-chilli.png",
-            "rating": "4.2"
+       
+       "title": "Batman Batmobile",
+        "brand": "Funskool",
+        "price": 745,
+        "id": 46,
+        "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/toys-batman-toy.png",
+        "rating": "4.7",
+        "category":"toys"
         }
 ###
 

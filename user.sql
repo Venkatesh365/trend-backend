@@ -22,7 +22,15 @@
 --     title  VARCHAR(200)
 -- );
 
-DELETE FROM
-  products
-WHERE
-  id = 24
+-- DELETE FROM
+--   products
+-- WHERE
+--   id = 24
+
+-- ALTER TABLE
+--   products
+-- ADD
+--   category VARCHAR(200);
+
+-- DELETE FROM
+--   products;

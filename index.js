@@ -38,18 +38,7 @@ initializeDBAndServer();
 
 
 
-// // products//
-app.get("/prime-deals", async (request, response) => {
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-      products
-    ORDER BY
-      title;`;
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
- });
+
 
  app.use(function(req, res, next){
   res.header('Access-Control-Allow-Headers', '*');
@@ -70,11 +59,12 @@ app.get("/prime-deals", async (request, response) => {
     id,
     price,
     image_url,
-    rating
+    rating,
+    category
   } = bookDetails;
   const addBookQuery = `
     INSERT INTO
-      products (title,brand,id,price,image_url,rating)
+      products (title,brand,id,price,image_url,rating, category)
     VALUES
       (
         '${title}',
@@ -82,16 +72,72 @@ app.get("/prime-deals", async (request, response) => {
          ${id},
          ${price},
         '${image_url}',
-        '${rating}'
+        '${rating}',
+        '${category}'
       );`;
 
   const dbResponse = await db.run(addBookQuery);
   const bookId = dbResponse.lastID;
   response.send({ bookId: bookId });
 });
+//user register//
+app.post("/users/", async (request, response) => {
+  const { username, name, password, gender, location } = request.body;
+  const hashedPassword = await bcrypt.hash(request.body.password, 10);
+  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+  const dbUser = await db.get(selectUserQuery);
+  if (dbUser === undefined) {
+    const createUserQuery = `
+      INSERT INTO 
+        user (username, name, password, gender, location) 
+      VALUES 
+        (
+          '${username}', 
+          '${name}',
+          '${hashedPassword}', 
+          '${gender}',
+          '${location}'
+        )`;
+    const dbResponse = await db.run(createUserQuery);
+    const newUserId = dbResponse.lastID;
+    response.send(`Created new user with ${newUserId}`);
+  } else {
+    response.status = 400;
+    response.send("User already exists");
+  }
+});
 
 
-app.get("/products/high-price", async (request, response) => {
+
+
+
+//user login//
+app.post("/login", async (request, response) => {
+const { username, password } = request.body;
+const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+const dbUser = await db.get(selectUserQuery);
+if (dbUser === undefined) {
+  response.status(400);
+  response.send("Invalid User");
+} else {
+  const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
+  if (isPasswordMatched === true) {
+    const payload = {
+      username: username,
+    };
+    const jwtToken = jwt.sign(payload, "MY_SECRET_TOKEN");
+    response.send({ jwtToken });
+  } else {
+    response.status(400);
+    response.send("Invalid Password");
+  }
+}
+});
+
+
+
+//high-price//
+app.get("/high-price", async (request, response) => {
   const {
     order = "DESC",
     order_by = "price",
@@ -109,8 +155,8 @@ app.get("/products/high-price", async (request, response) => {
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
 });
-
-app.get("/products/low-price", async (request, response) => {
+//low-price//
+app.get("/low-price", async (request, response) => {
   const {
     order = "ASC",
     order_by = "price",
@@ -128,89 +174,86 @@ app.get("/products/low-price", async (request, response) => {
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
 });
+//clothing//
+app.get("/clothing", async (request, response) => {
+  
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+    category LIKE 'clothing'`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
+//electronics//
+app.get("/electronics", async (request, response) => {
+  
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+    category LIKE 'electronics'`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
 
+//appliances//
+app.get("/appliances", async (request, response) => {
+  
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+    category LIKE 'appliances'`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
+//toys//
+app.get("/toys", async (request, response) => {
+  
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+    category LIKE 'toys'`;
+    
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
 
- // userdata//
-// app.get("/userdata/", async (request, response) => {
-//   const getBooksQuery = `
-//     SELECT
-//       *
-//     FROM
-//       user
-//     ORDER BY
-//       name;`;
-//   const booksArray = await db.all(getBooksQuery);
-//   response.send(booksArray);
-// });
+ //userdata//
+app.get("/userdata/", async (request, response) => {
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+      user
+    ORDER BY
+      name;`;
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
 
-// //user register//
-// app.post("/users/", async (request, response) => {
-//     const { username, name, password, gender, location } = request.body;
-//     const hashedPassword = await bcrypt.hash(request.body.password, 10);
-//     const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
-//     const dbUser = await db.get(selectUserQuery);
-//     if (dbUser === undefined) {
-//       const createUserQuery = `
-//         INSERT INTO 
-//           user (username, name, password, gender, location) 
-//         VALUES 
-//           (
-//             '${username}', 
-//             '${name}',
-//             '${hashedPassword}', 
-//             '${gender}',
-//             '${location}'
-//           )`;
-//       const dbResponse = await db.run(createUserQuery);
-//       const newUserId = dbResponse.lastID;
-//       response.send(`Created new user with ${newUserId}`);
-//     } else {
-//       response.status = 400;
-//       response.send("User already exists");
-//     }
-//   });
-
-//   //user logins//
-//   app.post("/logins", async (request, response) => {
-//     const { username, password } = request.body;
-//     const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
-//     const dbUser = await db.get(selectUserQuery);
-//     if (dbUser === undefined) {
-//     response.status(400);
-//      response.send("Invalid User");
-//     } else {
-//       const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
-//     if (isPasswordMatched === true) {
-//         response.send("Login Success!");
-//       } else {
-//         response.status(400);
-//       response.send("Invalid Password");
-//    }
-//    }
-//   });
-
- 
-
-//  //user login//
-//  app.post("/login", async (request, response) => {
-//   const { username, password } = request.body;
-//   const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
-//   const dbUser = await db.get(selectUserQuery);
-//   if (dbUser === undefined) {
-//     response.status(400);
-//     response.send("Invalid User");
-//   } else {
-//     const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
-//     if (isPasswordMatched === true) {
-//       const payload = {
-//         username: username,
-//       };
-//       const jwtToken = jwt.sign(payload, "MY_SECRET_TOKEN");
-//       response.send({ jwtToken });
-//     } else {
-//       response.status(400);
-//       response.send("Invalid Password");
-//     }
-//   }
-// });
-
+// products//
+app.get("/prime-deals", async (request, response) => {
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+      products
+    ORDER BY
+      title;`;
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+ });
