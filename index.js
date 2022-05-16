@@ -271,3 +271,16 @@ app.get("/prime-deals", async (request, response) => {
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
  });
+
+ app.get("/products/:id/", async (request, response) => {
+  const {id} = request.params;
+  const getBookQuery = `
+    SELECT
+      *
+    FROM
+      products
+    WHERE
+      id = ${id};`;
+  const book = await db.get(getBookQuery);
+  response.send(book);
+});

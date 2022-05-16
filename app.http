@@ -18,4 +18,4 @@ GET http://localhost:4000/grocery
 
 ###
 
-GET http://localhost:4000/products/low-price
+GET http://localhost:4000/products/16/
