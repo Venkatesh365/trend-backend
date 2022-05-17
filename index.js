@@ -284,3 +284,70 @@ app.get("/prime-deals", async (request, response) => {
   const book = await db.get(getBookQuery);
   response.send(book);
 });
+
+
+
+const authenticateToken = (request, response, next) => {
+  let jwtToken;
+  const authHeader = request.headers["authorization"];
+  if (authHeader !== undefined) {
+    jwtToken = authHeader.split(" ")[1];
+  }
+  if (jwtToken === undefined) {
+    response.status(401);
+    response.send("Invalid JWT Token");
+  } else {
+    jwt.verify(jwtToken, "MY_SECRET_TOKEN", async (error, payload) => {
+      if (error) {
+        response.status(401);
+        response.send("Invalid JWT Token");
+      } else {
+        request.username = payload.username;
+        next();
+      }
+    });
+  }
+};
+
+app.get("/books/", authenticateToken, async (request, response) => {
+  const getBooksQuery = `
+   SELECT
+    *
+   FROM
+    products
+   ORDER BY
+    id;`;
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
+
+
+app.get("/profile/", authenticateToken, async (request, response) => {
+  let { username } = request;
+  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+  const userDetails = await db.get(selectUserQuery);
+  response.send(userDetails);
+});
+
+
+
+app.get("/products/", async (request, response) => {
+  const {
+    offset = 0,
+    limit = 2,
+    order = "ASC",
+    order_by = "id",
+    search_q = "",
+  } = request.query;
+  const getBooksQuery = `
+    SELECT
+      *
+    FROM
+     products
+    WHERE
+     title LIKE '%${search_q}%'
+    ORDER BY ${order_by} ${order}
+    LIMIT ${limit} OFFSET ${offset};`;
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
