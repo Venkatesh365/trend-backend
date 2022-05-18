@@ -136,154 +136,6 @@ if (dbUser === undefined) {
 
 
 
-//high-price//
-app.get("/high-price", async (request, response) => {
-  const {
-    order = "DESC",
-    order_by = "price",
-    search_q = "",
-  } = request.query;
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-     title LIKE '%${search_q}%'
-    ORDER BY ${order_by} ${order}`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-//low-price//
-app.get("/low-price", async (request, response) => {
-  const {
-    order = "ASC",
-    order_by = "price",
-    search_q = "",
-  } = request.query;
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-     title LIKE '%${search_q}%'
-    ORDER BY ${order_by} ${order}`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-//clothing//
-app.get("/clothing", async (request, response) => {
-  
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-    category LIKE 'clothing'`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-//electronics//
-app.get("/electronics", async (request, response) => {
-  
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-    category LIKE 'electronics'`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-
-//appliances//
-app.get("/appliances", async (request, response) => {
-  
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-    category LIKE 'appliances'`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-//toys//
-app.get("/toys", async (request, response) => {
-  
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-    category LIKE 'toys'`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-//grocery//
-app.get("/grocery", async (request, response) => {
-  
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-     products
-    WHERE
-    category LIKE 'grocery'`;
-    
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-
- //userdata//
-app.get("/userdata/", async (request, response) => {
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-      user
-    ORDER BY
-      name;`;
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
-
-// products//
-app.get("/prime-deals", async (request, response) => {
-  const getBooksQuery = `
-    SELECT
-      *
-    FROM
-      products
-    ORDER BY
-      title;`;
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
- });
-
- app.get("/products/:id/", async (request, response) => {
-  const {id} = request.params;
-  const getBookQuery = `
-    SELECT
-      *
-    FROM
-      products
-    WHERE
-      id = ${id};`;
-  const book = await db.get(getBookQuery);
-  response.send(book);
-});
 
 
 
@@ -309,17 +161,7 @@ const authenticateToken = (request, response, next) => {
   }
 };
 
-app.get("/books/", authenticateToken, async (request, response) => {
-  const getBooksQuery = `
-   SELECT
-    *
-   FROM
-    products
-   ORDER BY
-    id;`;
-  const booksArray = await db.all(getBooksQuery);
-  response.send(booksArray);
-});
+
 
 
 app.get("/profile/", authenticateToken, async (request, response) => {
@@ -333,11 +175,7 @@ app.get("/profile/", authenticateToken, async (request, response) => {
 
 app.get("/products/", async (request, response) => {
   const {
-    offset = 0,
-    limit = 2,
-    order = "ASC",
-    order_by = "id",
-    search_q = "",
+    category=""
   } = request.query;
   const getBooksQuery = `
     SELECT
@@ -345,9 +183,7 @@ app.get("/products/", async (request, response) => {
     FROM
      products
     WHERE
-     title LIKE '%${search_q}%'
-    ORDER BY ${order_by} ${order}
-    LIMIT ${limit} OFFSET ${offset};`;
+    category LIKE '%${category}%' `
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
 });
