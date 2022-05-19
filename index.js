@@ -173,9 +173,11 @@ app.get("/profile/", authenticateToken, async (request, response) => {
 
 
 
-app.get("/products/", async (request, response) => {
+app.get("/products/", authenticateToken,async (request, response) => {
   const {
-    category=""
+    sort_by = "ASC",
+    title_search="",
+    category="",
   } = request.query;
   const getBooksQuery = `
     SELECT
@@ -183,7 +185,10 @@ app.get("/products/", async (request, response) => {
     FROM
      products
     WHERE
-    category LIKE '%${category}%' `
+     title LIKE '%${title_search}%' AND category LIKE '%${category}%' 
+    ORDER BY price ${sort_by}
+    ;`;
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
 });
+
